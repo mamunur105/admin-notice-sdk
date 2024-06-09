@@ -56,8 +56,8 @@ final class Plugin {
 	 * Class Constructor
 	 */
 	private function __construct() {
-//		$this->loader = Loader::instance();
-//		$this->run();
+		$this->loader = Loader::instance();
+		$this->run();
 	}
 	/**
 	 * Load Text Domain
@@ -83,9 +83,9 @@ final class Plugin {
 	 * @return void
 	 */
 	public function init() {
-//		Review::instance();
+		Review::instance();
 //		// Include File.
-//		Assets::instance();
+		Assets::instance();
 	}
 	
 	/**

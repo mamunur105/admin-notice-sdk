@@ -72,7 +72,7 @@ class Review {
 		if ( ! $now > $past_date || $now < $remind_due ) {
 		//	return;
 		}
-
+  
 		$this->loader->add_action( 'admin_notices', $this, 'tiny_sdk_display_admin_notice' );
 	}
 
@@ -140,26 +140,26 @@ class Review {
 		// WordPress global variable
 		global $pagenow;
 		$exclude = [
-			'themes.php',
-			'users.php',
-			'tools.php',
-			'options-general.php',
-			'options-writing.php',
-			'options-reading.php',
-			'options-discussion.php',
-			'options-media.php',
-			'options-permalink.php',
-			'options-privacy.php',
-			'admin.php',
-			'import.php',
-			'export.php',
-			'site-health.php',
-			'export-personal-data.php',
-			'erase-personal-data.php',
+//			'themes.php',
+//			'users.php',
+//			'tools.php',
+//			'options-general.php',
+//			'options-writing.php',
+//			'options-reading.php',
+//			'options-discussion.php',
+//			'options-media.php',
+//			'options-permalink.php',
+//			'options-privacy.php',
+//			'admin.php',
+//			'import.php',
+//			'export.php',
+//			'site-health.php',
+//			'export-personal-data.php',
+//			'erase-personal-data.php',
 		];
-
 		if ( ! in_array( $pagenow, $exclude ) ) {
-
+			
+			error_log( print_r( 'Hello', true) . "\n\n", 3, __DIR__ . '/log.txt' );
 			$args = [ '_wpnonce' => wp_create_nonce( 'tiny_sdk_notice_nonce' ) ];
 
 			$dont_disturb = add_query_arg( $args + [ 'tiny_sdk_spare_me' => '1' ], $this->tiny_sdk_current_admin_url() );

@@ -82,8 +82,7 @@ if (
 		 */
 		mix
 			// Backend JS
-			.js("src/admin-settings.jsx", "assets/js/backend/")
-			.react()
+			.js("src/admin-settings.js", "assets/js/backend/")
 			// Backend CSS
 			.sass('src/admin-settings.scss', 'assets/css/backend/').sourceMaps(true, 'source-map');
 	} else {
@@ -92,8 +91,7 @@ if (
 		 */
 		mix
 			// Backend JS
-			.js("src/admin-settings.jsx", "assets/backend/")
-			.react();
+			.js("src/admin-settings.js", "assets/backend/");
 		/**
 		 * CSS
 		 */
