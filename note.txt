@@ -1,0 +1,4 @@
+== What to do ==
+
+1. Create Notice : https://prnt.sc/cUbZRKkNEl64
+2. Implement All functionality

@@ -1,0 +1,43 @@
+{
+  "name": "admin-notice-sdk",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "https://github.com/mamunur105/admin-notice-sdk.git",
+  "author": "Mamunur Rashid <30565480+mamunur105@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "npm run development",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "prod": "npm run production && npm run cleanmap",
+    "production": "mix --production",
+    "package": "npm run clean && npm run dev && npm run prod && npm run dev --package",
+    "clean": "rm -rf dist/*",
+    "cleanmap": "rm -rf assets/**/**/*.map",
+    "zip": "npm run package && npm run dev --zip"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.3.7",
+    "antd": "^5.17.2",
+    "axios": "^1.6.8",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.23.1",
+    "toastr": "^2.1.4",
+    "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.24.1",
+    "archiver": "^5.3.2",
+    "cli-color": "^2.0.4",
+    "emojic": "^1.1.17",
+    "fs-extra": "^11.2.0",
+    "laravel-mix": "^6.0.49",
+    "postcss": "^8.4.38",
+    "sass": "^1.77.0",
+    "sass-loader": "^12.6.0",
+    "wp-pot": "^1.10.2"
+  }
+}
