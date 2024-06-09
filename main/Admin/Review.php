@@ -33,7 +33,7 @@ class Review {
 	 */
 	private function __construct() {
 		$this->loader = Loader::instance();
-		$this->loader->add_action( 'admin_init', $this, 'tiny_sdk_check_installation_time' );
+		$this->tiny_sdk_check_installation_time();
 		$this->loader->add_action( 'admin_init', $this, 'tiny_sdk_spare_me', 5 );
 	}
 
@@ -137,6 +137,7 @@ class Review {
 	 * Display Admin Notice, asking for a review
 	 **/
 	public function tiny_sdk_display_admin_notice() {
+	
 		// WordPress global variable
 		global $pagenow;
 		$exclude = [
@@ -157,9 +158,9 @@ class Review {
 //			'export-personal-data.php',
 //			'erase-personal-data.php',
 		];
+		
 		if ( ! in_array( $pagenow, $exclude ) ) {
 			
-			error_log( print_r( 'Hello', true) . "\n\n", 3, __DIR__ . '/log.txt' );
 			$args = [ '_wpnonce' => wp_create_nonce( 'tiny_sdk_notice_nonce' ) ];
 
 			$dont_disturb = add_query_arg( $args + [ 'tiny_sdk_spare_me' => '1' ], $this->tiny_sdk_current_admin_url() );
@@ -173,22 +174,22 @@ class Review {
 					<h3>Enjoying "<?php echo $plugin_name; ?>"? </h3>
 					<p>Thank you for choosing "<string><?php echo $plugin_name; ?></string>". If you found our plugin useful, please consider giving us a 5-star rating on WordPress.org. Your feedback will motivate us to grow.</p>
 					<div class="tiny_sdk-review-notice_actions">
-						<a href="<?php echo esc_url( $reviewurl ); ?>" class="tiny_sdk-review-button ancenter-review-button--cta" target="_blank"><span>⭐ Yes, You Deserve It!</span></a>
-						<a href="<?php echo esc_url( $rated ); ?>" class="ancenter-review-button ancenter-review-button--cta ancenter-review-button--outline"><span>😀 Already Rated!</span></a>
-						<a href="<?php echo esc_url( $remind_me ); ?>" class="ancenter-review-button ancenter-review-button--cta ancenter-review-button--outline"><span>🔔 Remind Me Later</span></a>
-						<!-- <a href="--><?php // echo esc_url( $dont_disturb ); ?><!--" class="ancenter-review-button ancenter-review-button--cta ancenter-review-button--error ancenter-review-button--outline"><span>😐 No Thanks </span></a>-->
+						<a href="<?php echo esc_url( $reviewurl ); ?>" class="tiny_sdk-review-button tiny_sdk-review-button--cta" target="_blank"><span>⭐ Yes, You Deserve It!</span></a>
+						<a href="<?php echo esc_url( $rated ); ?>" class="tiny_sdk-review-button tiny_sdk-review-button--cta tiny_sdk-review-button--outline"><span>😀 Already Rated!</span></a>
+						<a href="<?php echo esc_url( $remind_me ); ?>" class="tiny_sdk-review-button tiny_sdk-review-button--cta tiny_sdk-review-button--outline"><span>🔔 Remind Me Later</span></a>
+						<!-- <a href="--><?php // echo esc_url( $dont_disturb ); ?><!--" class="tiny_sdk-review-button tiny_sdk-review-button--cta tiny_sdk-review-button--error tiny_sdk-review-button--outline"><span>😐 No Thanks </span></a>-->
 					</div>
 				</div>
 			</div>
 			<style>
-				.ancenter-review-button--cta {
+				.tiny_sdk-review-button--cta {
 					--e-button-context-color: #5d3dfd;
 					--e-button-context-color-dark: #5d3dfd;
 					--e-button-context-tint: rgb(75 47 157/4%);
 					--e-focus-color: rgb(75 47 157/40%);
 				}
 
-				.ancenter-review-notice {
+				.tiny_sdk-review-notice {
 					position: relative;
 					margin: 5px 20px 5px 2px;
 					border: 1px solid #ccd0d4;
@@ -198,11 +199,11 @@ class Review {
 					border-inline-start-width: 4px;
 				}
 
-				.ancenter-review-notice.notice {
+				.tiny_sdk-review-notice.notice {
 					padding: 0;
 				}
 
-				.ancenter-review-notice:before {
+				.tiny_sdk-review-notice:before {
 					position: absolute;
 					top: -1px;
 					bottom: -1px;
@@ -214,37 +215,37 @@ class Review {
 					content: "";
 				}
 
-				.ancenter-review-notice_content {
+				.tiny_sdk-review-notice_content {
 					padding: 20px;
 				}
 
-				.ancenter-review-notice_actions > * + * {
+				.tiny_sdk-review-notice_actions > * + * {
 					margin-inline-start: 8px;
 					-webkit-margin-start: 8px;
 					-moz-margin-start: 8px;
 				}
 
-				.ancenter-review-notice p {
+				.tiny_sdk-review-notice p {
 					margin: 0;
 					padding: 0;
 					line-height: 1.5;
 				}
 
-				p + .ancenter-review-notice_actions {
+				p + .tiny_sdk-review-notice_actions {
 					margin-top: 1rem;
 				}
 
-				.ancenter-review-notice h3 {
+				.tiny_sdk-review-notice h3 {
 					margin: 0;
 					font-size: 1.0625rem;
 					line-height: 1.2;
 				}
 
-				.ancenter-review-notice h3 + p {
+				.tiny_sdk-review-notice h3 + p {
 					margin-top: 8px;
 				}
 
-				.ancenter-review-button {
+				.tiny_sdk-review-button {
 					display: inline-block;
 					padding: 0.4375rem 0.75rem;
 					border: 0;
@@ -257,13 +258,13 @@ class Review {
 					white-space: nowrap;
 				}
 
-				.ancenter-review-button:active {
+				.tiny_sdk-review-button:active {
 					background: var(--e-button-context-color-dark);
 					color: #fff;
 					text-decoration: none;
 				}
 
-				.ancenter-review-button:focus {
+				.tiny_sdk-review-button:focus {
 					outline: 0;
 					background: var(--e-button-context-color-dark);
 					box-shadow: 0 0 0 2px var(--e-focus-color);
@@ -271,36 +272,36 @@ class Review {
 					text-decoration: none;
 				}
 
-				.ancenter-review-button:hover {
+				.tiny_sdk-review-button:hover {
 					background: var(--e-button-context-color-dark);
 					color: #fff;
 					text-decoration: none;
 				}
 
-				.ancenter-review-button.focus {
+				.tiny_sdk-review-button.focus {
 					outline: 0;
 					box-shadow: 0 0 0 2px var(--e-focus-color);
 				}
 
-				.ancenter-review-button--error {
+				.tiny_sdk-review-button--error {
 					--e-button-context-color: #682e36;
 					--e-button-context-color-dark: #ae2131;
 					--e-button-context-tint: rgba(215, 43, 63, 0.04);
 					--e-focus-color: rgba(215, 43, 63, 0.4);
 				}
 
-				.ancenter-review-button.ancenter-review-button--outline {
+				.tiny_sdk-review-button.tiny_sdk-review-button--outline {
 					border: 1px solid;
 					background: 0 0;
 					color: var(--e-button-context-color);
 				}
 
-				.ancenter-review-button.ancenter-review-button--outline:focus {
+				.tiny_sdk-review-button.tiny_sdk-review-button--outline:focus {
 					background: var(--e-button-context-tint);
 					color: var(--e-button-context-color-dark);
 				}
 
-				.ancenter-review-button.ancenter-review-button--outline:hover {
+				.tiny_sdk-review-button.tiny_sdk-review-button--outline:hover {
 					background: var(--e-button-context-tint);
 					color: var(--e-button-context-color-dark);
 				}
